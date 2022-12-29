@@ -32,7 +32,7 @@ export default function Home({ todos }: PostProps) {
         <h1 className="text-white text-2xl font-bold">My Todo App</h1>
       </nav>
       <div>
-        <form className="flex justify-center mt-10">
+        <div className="flex justify-center mt-10">
           <div className="bg-gray-50 p-8 rounded-lg">
             <h1 className="text-center mb-4">Write Todo List</h1>
             <div className="flex space-x-2 p-2 bg-white rounded-md">
@@ -40,7 +40,7 @@ export default function Home({ todos }: PostProps) {
               <button onClick={handleClick} className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold">send</button>
             </div>
           </div>
-        </form>
+        </div>
         <div>
           {todos?.map((todo, index) => (
             <div key={todo.id} className="flex justify-center">

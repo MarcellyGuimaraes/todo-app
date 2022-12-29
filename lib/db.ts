@@ -7,12 +7,11 @@ export interface Todo {
 export async function getAllTodos() {
   const data = await prisma.todo.findMany();
 
-  //   console.log(data);
   return data;
 }
 
 export async function createTodo(description: string) {
-  prisma.todo.create({
+  await prisma.todo.create({
     data: {
       description,
     },
