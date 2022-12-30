@@ -72,7 +72,7 @@ export default function Home({ todos }: PostProps) {
       <div>
         <div className="flex justify-center mt-10">
           <div className="bg-gray-50 p-8 rounded-lg">
-            <h1 className="text-center mb-4">{title}</h1>
+            <h1 className="mb-4 text-center text-xl font-bold">{title}</h1>
             <div className="flex flex-col p-2 bg-white rounded-md">
               <input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} type="text" placeholder="Escreva o título..." className="w-full text-center py-2 mb-3 outline-none bg-slate-100" />
               <input value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} type="text" placeholder="Escreva a descrição..." className="w-full text-center py-2 outline-none bg-slate-100" />
@@ -101,7 +101,7 @@ export default function Home({ todos }: PostProps) {
                 </div>
                 <span className="absolute -left-3 -top-3 bg-green-500 flex justify-center items-center rounded-full w-8 h-8 text-gray-50 font-bold">{index + 1}</span>
                 <div className="bg-white px-12 py-8 rounded-lg w-80">
-                  <p>{todo.title}</p>
+                  <p className="text-xl font-bold">{todo.title}</p>
                   <p>{todo.description}</p>
                 </div>
               </div>
