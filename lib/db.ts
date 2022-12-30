@@ -16,7 +16,7 @@ export async function createTodo(title: string, description: string) {
   console.log();
   await prisma.todo.create({
     data: {
-      title,
+      title: title,
       description,
     },
   });
