@@ -1,9 +1,7 @@
 import { GetServerSideProps } from "next"
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { FormData, getAllTodos, PostProps, Todo } from '../lib/db';
-import DeleteIcon from '../icons/deleteIcon';
-import EditIcon from "../icons/checkIconOutline";
+import { FormData, getAllTodos, PostProps } from '../lib/db';
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const todos = await getAllTodos()
