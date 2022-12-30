@@ -8,7 +8,6 @@ export default async function handler(
   const todoId = req.query.id;
 
   if (req.method === "DELETE") {
-    console.log("deleted", todoId);
     const todo = await prisma.todo.delete({
       where: { id: Number(todoId) },
     });
