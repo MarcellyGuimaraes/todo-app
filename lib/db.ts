@@ -1,8 +1,7 @@
 import { prisma } from "./prisma";
 export interface Todo {
   id: number;
-  // title: string;
-  [key: string]: any;
+  title: string;
   description: string;
 }
 
