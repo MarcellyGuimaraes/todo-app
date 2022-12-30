@@ -1,6 +1,7 @@
 import { prisma } from "./prisma";
 export interface Todo {
   id: number;
+  title: string;
   description: string;
 }
 
@@ -10,9 +11,10 @@ export async function getAllTodos() {
   return data;
 }
 
-export async function createTodo(description: string) {
+export async function createTodo(description: string, title: string) {
   await prisma.todo.create({
     data: {
+      title,
       description,
     },
   });

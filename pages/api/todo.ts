@@ -6,9 +6,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const [title, description] = JSON.parse(req.body);
   if (req.method === "POST") {
-    const data = JSON.parse(req.body);
-    await createTodo(data);
+    // const data = JSON.parse(req.body);
+    await createTodo(title, description);
     return res.status(200).json({ message: "Success" });
   }
   res.status(200).json({ name: "John Doe" });
