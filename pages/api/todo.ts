@@ -7,8 +7,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const [title, description] = JSON.parse(req.body);
+
   if (req.method === "POST") {
     await createTodo(title, description);
+    console.log("Título", title);
+    console.log("Descrição", description);
     return res.status(200).json({ message: "Success" });
   }
   res.status(200).json({ name: "John Doe" });

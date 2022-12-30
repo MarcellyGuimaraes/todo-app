@@ -23,7 +23,7 @@ export default function Home({ todos }: PostProps) {
   const handleClick = async () => {
     await fetch('/api/todo', {
       method: 'POST',
-      body: JSON.stringify(description)
+      body: JSON.stringify([title, description])
     })
   }
 
