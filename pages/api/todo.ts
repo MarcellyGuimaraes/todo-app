@@ -8,7 +8,6 @@ export default async function handler(
 ) {
   const [title, description] = JSON.parse(req.body);
   if (req.method === "POST") {
-    // const data = JSON.parse(req.body);
     await createTodo(title, description);
     return res.status(200).json({ message: "Success" });
   }
