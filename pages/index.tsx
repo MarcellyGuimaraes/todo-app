@@ -79,7 +79,7 @@ export default function Home({ todos }: PostProps) {
             <input required value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="Escreva o título..." className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
             <input required value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} placeholder="Escreva a descrição..." className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
           </div>
-          <button onClick={() => create(form)} className="w-full rounded-md bg-emerald-400 px-2 py-1 font-semibold text-white">Criar/Editar tarefa</button>
+          <button onClick={() => form.title && form.description ? create(form) : notify('error', 'Preencha todos os campos!!')} className="w-full rounded-md bg-emerald-400 px-2 py-1 font-semibold text-white">Criar/Editar tarefa</button>
           <ToastContainer />
         </FormContainer>
         <>
