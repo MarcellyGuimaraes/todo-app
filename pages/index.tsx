@@ -76,8 +76,8 @@ export default function Home({ todos }: PostProps) {
         <FormContainer>
           <h1 className="mb-4 text-center text-xl font-bold">{title}</h1>
           <div className="flex flex-col rounded-md p-2">
-            <input value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="Escreva o título..." className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
-            <input value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} placeholder="Escreva a descrição..." className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
+            <input required value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="Escreva o título..." className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
+            <input required value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} placeholder="Escreva a descrição..." className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
           </div>
           <button onClick={() => create(form)} className="w-full rounded-md bg-emerald-400 px-2 py-1 font-semibold text-white">Criar/Editar tarefa</button>
           <ToastContainer />

@@ -1,5 +1,3 @@
-import { GetServerSideProps } from "next";
-import { prisma } from "./prisma";
 export interface Todo {
   id: number;
   title: string;
