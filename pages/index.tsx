@@ -28,20 +28,35 @@ export default function Home({ todos }: PostProps) {
     router.replace(router.asPath)
   }
 
-  function create(data: FormData) {
+  function create(data: FormData, id: number) {
     try {
-      fetch('/api/todo', {
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST'
-      }).then(() => {
-        setForm({ title: '', description: '', id: 0 })
-        refreshData()
+      if (id === 0) {
+        fetch(`/api/todo/`, {
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST'
+        }).then(() => {
+          setForm({ title: '', description: '', id: 0 })
+          refreshData()
+        }
+        )
+        notify('success', 'Tarefa criada com sucesso!')
+      } else {
+        fetch(`/api/todo/${id}`, {
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'PUT'
+        }).then(() => {
+          setForm({ title: '', description: '', id: 0 })
+          refreshData()
+        }
+        )
+        notify('success', 'Tarefa editada com sucesso!')
       }
-      )
-      notify('success', 'Tarefa criada / editada com sucesso!')
     } catch (error) {
       console.log(error);
     }
@@ -76,10 +91,21 @@ export default function Home({ todos }: PostProps) {
         <FormContainer>
           <h1 className="mb-4 text-center text-xl font-bold">{title}</h1>
           <div className="flex flex-col rounded-md p-2">
-            <input required value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} placeholder="Escreva o título..." className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
-            <input required value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} placeholder="Escreva a descrição..." className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
+            <input required
+              value={form.title}
+              onChange={e => setForm({ ...form, title: e.target.value })}
+              placeholder="Escreva o título..."
+              className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
+            <input required
+              value={form.description}
+              onChange={e => setForm({ ...form, description: e.target.value })}
+              placeholder="Escreva a descrição..."
+              className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
           </div>
-          <button onClick={() => form.title && form.description ? create(form) : notify('error', 'Preencha todos os campos!!')} className="w-full rounded-md bg-emerald-400 px-2 py-1 font-semibold text-white">Criar/Editar tarefa</button>
+          <button type="submit"
+            onClick={() => form.title && form.description ? create(form, form.id) : notify('error', 'Preencha todos os campos!!')}
+            className="w-full rounded-md bg-emerald-400 px-2 py-1 font-semibold text-white">
+            Criar/Editar tarefa</button>
           <ToastContainer />
         </FormContainer>
         <>
