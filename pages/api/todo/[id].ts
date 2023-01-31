@@ -8,27 +8,31 @@ export default async function handler(
   const { title, description } = req.body;
   const todoId = req.query.id;
 
-  if (req.method === "DELETE") {
-    const todo = await prisma.todo.delete({
-      where: { id: Number(todoId) },
-    });
-    res.json(todo);
-  } else if (req.method === "PUT") {
-    try {
-      await prisma.todo.update({
-        where: {
-          id: Number(todoId),
-        },
-        data: {
-          title: title,
-          description: description,
-        },
-      });
-      res.status(200).json({ message: "Todo criada com sucesso" });
-    } catch (error) {
-      console.log("Algo deu errado");
+  try {
+    switch (req.method) {
+      case "DELETE":
+        const todo = await prisma.todo.delete({
+          where: { id: Number(todoId) },
+        });
+        res.json(todo);
+        break;
+      case "PUT":
+        await prisma.todo.update({
+          where: {
+            id: Number(todoId),
+          },
+          data: {
+            title: title,
+            description: description,
+          },
+        });
+        res.status(200).json({ message: "Todo editada com sucesso" });
+        break;
+      default:
+        console.log("A tarefa não pode ser deletada/editada");
+        break;
     }
-  } else {
-    console.log("Note could not be created");
+  } catch (error) {
+    console.log("Algo deu errado");
   }
 }
