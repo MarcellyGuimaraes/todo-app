@@ -9,6 +9,7 @@ import { DeleteIcon, EditIcon } from "../components/Icons";
 import { CardContainer, FormContainer } from "../components/Containers";
 import Navbar from "../components/Navbar";
 import Input from "../components/Inputs";
+import CardText from "../components/CardText";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const todos = await prisma.todo.findMany();
@@ -124,10 +125,7 @@ export default function Home({ todos }: PostProps) {
               </div>
               <span className="absolute -left-3 -top-3 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400 font-bold text-gray-50">{index + 1}</span>
 
-              <div className="w-80 rounded-lg bg-cyan-50 px-12 py-8">
-                <p className="text-xl font-bold">{todo.title}</p>
-                <p>{todo.description}</p>
-              </div>
+              <CardText todo={todo} />
             </CardContainer>
           ))}
         </>
