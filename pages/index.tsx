@@ -8,6 +8,7 @@ import { prisma } from '../lib/prisma';
 import { DeleteIcon, EditIcon } from "../components/Icons";
 import { CardContainer, FormContainer } from "../components/Containers";
 import Navbar from "../components/Navbar";
+import Input from "../components/Inputs";
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const todos = await prisma.todo.findMany();
@@ -38,8 +39,8 @@ export default function Home({ todos }: PostProps) {
           },
           method: 'POST'
         }).then(() => {
-          setForm({ title: '', description: '', id: 0 })
           refreshData()
+          setForm({ title: '', description: '', id: 0 })
         }
         )
         notify('success', 'Tarefa criada com sucesso!')
@@ -60,6 +61,8 @@ export default function Home({ todos }: PostProps) {
     } catch (error) {
       console.log(error);
     }
+    setTitle(`Criar nova tarefa`);
+
   }
 
   function handleDelete(id: number) {
@@ -91,16 +94,16 @@ export default function Home({ todos }: PostProps) {
         <FormContainer>
           <h1 className="mb-4 text-center text-xl font-bold">{title}</h1>
           <div className="flex flex-col rounded-md p-2">
-            <input required
-              value={form.title}
+            <Input
               onChange={e => setForm({ ...form, title: e.target.value })}
               placeholder="Escreva o título..."
-              className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
-            <input required
-              value={form.description}
+              value={form.title}
+            />
+            <Input
               onChange={e => setForm({ ...form, description: e.target.value })}
               placeholder="Escreva a descrição..."
-              className="mb-3 w-full bg-gray-100 py-2 text-center outline-none" />
+              value={form.description}
+            />
           </div>
           <button type="submit"
             onClick={() => form.title && form.description ? create(form, form.id) : notify('error', 'Preencha todos os campos!!')}
@@ -120,6 +123,7 @@ export default function Home({ todos }: PostProps) {
                 </button>
               </div>
               <span className="absolute -left-3 -top-3 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-400 font-bold text-gray-50">{index + 1}</span>
+
               <div className="w-80 rounded-lg bg-cyan-50 px-12 py-8">
                 <p className="text-xl font-bold">{todo.title}</p>
                 <p>{todo.description}</p>
